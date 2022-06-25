@@ -1,0 +1,26 @@
+T: Sat Jun 25 21:21:02 2022 M: Plik z logami otwoarto.
+T: Sat Jun 25 21:21:04 2022 M: Plik: t1_plik1.bin zostal stworzony
+
+T: Sat Jun 25 21:21:05 2022 M: Plik: t1_plik2.bin zostal stworzony
+
+T: Sat Jun 25 21:21:05 2022 M: Obliczanie danych dla podanych plikow.
+T: Sat Jun 25 21:21:05 2022 M: Program wykonal obliczenia z tymi wynikami: 
+Bit Error Rate: 0
+Ilosc bitow: 800
+Ilosc bledow: 0
+Czas obliczen: 0 sec 
+
+T: Sat Jun 25 21:21:09 2022 M: Plik: t2_plik3.bin zostal stworzony
+
+T: Sat Jun 25 21:21:09 2022 M: Plik: t2_plik4.bin zostal stworzony
+
+T: Sat Jun 25 21:21:09 2022 M: Obliczanie danych dla podanych plikow.
+T: Sat Jun 25 21:21:09 2022 M: Program wykonal obliczenia z tymi wynikami: 
+Bit Error Rate: 0.025
+Ilosc bitow: 800
+Ilosc bledow: 20
+Czas obliczen: 0 sec 
+
+T: Sat Jun 25 21:21:28 2022 M: Plik z logami otwoarto.
+T: Sat Jun 25 21:21:31 2022 M: Ten plik t3_plik5.bin juz istnieje!
+
