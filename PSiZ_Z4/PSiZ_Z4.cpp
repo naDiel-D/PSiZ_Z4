@@ -1,4 +1,4 @@
-/* Daniel Flis
+﻿/* Daniel Flis
 
     PSiZ_Z4 */
 
@@ -46,7 +46,7 @@ void closeLog(void) // Zamknij log
     logPlik.close();
 }
 
-void createFile(const string fileName, const int counter, const char values) // Stworzenie pliku + zmiana 10 bit�w dla drugiego testu
+void createFile(const string fileName, const int counter, const char values) // Stworzenie pliku + zmiana 10 bitów dla drugiego testu
 {
     srand(time(NULL));
     ifstream myFile;
@@ -117,14 +117,10 @@ void createFile(const string fileName, const int counter, const char values) // 
                 aFile << values;
             }
         }
-
         string log = "Plik: " + fileName + " zostal stworzony\n";
-
         saveLog(log);
         system("cls");
-
     }
-
 }
 
 struct resultsBER // Struct dla BER
@@ -146,4 +142,36 @@ uint8_t hammingDistance(uint8_t n1, uint8_t n2) // Obliczenie BER
         x >>= 1;
     }
     return setBits;
+}
+
+resultsBER calculate(string path1, string path2) // Podanie scieżek dwóch plików i obliczenie BER pomiędzy nimi
+{
+    fstream f1, f2;
+    resultsBER outcome;
+
+    outcome.czas1 = 0;
+    outcome.czas2 = 0;
+    outcome.BER = 0;
+    outcome.err = 0;
+    outcome.qty = 0;
+
+    f1.open(path1.c_str(), ios::binary | ios::in);
+    f2.open(path2.c_str(), ios::binary | ios::in);
+    char a = 0x00;
+    char b = 0x00;
+    outcome.czas1 = clock();
+
+    while (!f1.eof())
+    {
+        f1 >> a;
+        f2 >> b;
+        if (!f1.eof())
+        {
+            outcome.err += hammingDistance(a, b);
+            outcome.qty += 8;
+        }
+    }
+    outcome.BER = (float)outcome.err / woutcomeynik.qty;
+    outcome.czas2 = clock();
+    return outcome;
 }
