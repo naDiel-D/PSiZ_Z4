@@ -171,7 +171,7 @@ resultsBER calculate(string path1, string path2) // Podanie scieżek dwóch plik
             outcome.qty += 8;
         }
     }
-    outcome.BER = (float)outcome.err / woutcomeynik.qty;
+    outcome.BER = (float)outcome.err / outcome.qty;
     outcome.czas2 = clock();
     return outcome;
 }
@@ -185,4 +185,100 @@ void displayResults(resultsBER outcome) // WYciągnięcie wyników ze struct BER
     wiad << "Ilosc bledow: " << outcome.err << endl;
     wiad << "Czas obliczen: " << ((float)outcome.czas2 - outcome.czas1) / CLOCKS_PER_SEC << " sec " << endl;
     saveLog(wiad.str());
+}
+
+int main(int argc, char* argv[])
+{
+    string path1;
+    string path2;
+    resultsBER outcome;
+
+    openLog("log.txt");
+
+    if (argc != 3)
+    {
+        char wybor;
+        while (true) // Definicja menu
+        {
+            cout << " Wcisnij cyfre aby okreslic nastepny krok: " << endl << endl
+                << " 1: Oblicz BER podajac sciezki plikow utworzonych przez Ciebie." << endl
+                << " 2: Wykonaj test 1 z zadania IV. " << endl
+                << " 3: Wykonaj test 2 z zadania IV. " << endl
+                << " 4: Wykonaj test 3 z zadania IV. " << endl
+                << " 0: Nie, nie chce mi sie! " << endl << endl;
+
+            wybor = _getch();
+
+            switch (wybor)
+            {
+            case '1':
+            {
+                cout << " Podaj sciezke do 1ego pliku: ";
+                cin >> path1;
+                cout << " Podaj sciezke do 2go pliku: ";
+                cin >> path2;
+
+                saveLog("Obliczanie danych dla podanych plikow.");
+                outcome = calculate(path1, path2);
+                displayResults(outcome);
+            }
+            break;
+
+            case '2':
+            {
+                // Test numer 1
+                createFile("t1_plik1.bin", 100, 0x55);
+                createFile("t1_plik2.bin", 100, 0x55);
+                saveLog("Obliczanie danych dla podanych plikow.");
+                outcome = calculate("t1_plik1.bin", "t1_plik2.bin");
+                displayResults(outcome);
+            }
+            break;
+
+            case '3':
+            {
+                // Test numer 2
+                createFile("t2_plik3.bin", 100, 0x55);
+                createFile("t2_plik4.bin", 100, 0x55);
+                saveLog("Obliczanie danych dla podanych plikow.");
+                outcome = calculate("t2_plik3.bin", "t2_plik4.bin");
+                displayResults(outcome);
+            }
+            break;
+
+            case '4':
+            {
+                // Test numer 3
+                createFile("t3_plik5.bin", 419430400, 0x55);
+                createFile("t3_plik6.bin", 419430400, 0x50);
+                saveLog("Obliczanie danych dla podanych plikow.");
+                outcome = calculate("t3_plik5.bin", "t3_plik6.bin");
+                displayResults(outcome);
+            }
+            break;
+
+            case '0':
+                closeLog();
+                exit(0);
+                break;
+
+            default: cout << "Wybrales niemozliwa opcje. Sprawdz czy jestes w dobrym Multiversie." << endl;
+            }
+            cout << endl << endl;
+            cout << "Cokolwiek wcisniesz - wyladujesz na powrot w menu glownym" << endl;
+            _getch();
+            system("cls");
+        }
+    }
+    else
+    {
+        path1 = argv[1];
+        path2 = argv[2];
+
+        saveLog("Obliczanie danych dla podanych plikow.");
+        outcome = calculate(path1, path2);
+        displayResults(outcome);
+        closeLog();
+        return 0;
+    }
 }
