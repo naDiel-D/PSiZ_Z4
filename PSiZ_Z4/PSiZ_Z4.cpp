@@ -97,11 +97,9 @@ void createFile(const string fileName, const int counter, const char values) // 
                     for (k; k < lM[i]; k++)
                     {
                         aFile << values;
-
                     }
 
                     aFile << diffCharacter;
-
                     k++;
                 }
                 else {
@@ -114,7 +112,6 @@ void createFile(const string fileName, const int counter, const char values) // 
         }
         else
         {
-
             for (size_t i = 0; i < counter; i++)
             {
                 aFile << values;
@@ -129,3 +126,12 @@ void createFile(const string fileName, const int counter, const char values) // 
     }
 
 }
+
+struct resultsBER // Struct dla BER
+{
+    clock_t czas1;
+    clock_t czas2;
+    float BER;
+    double bledy;
+    double ilosc;
+};
