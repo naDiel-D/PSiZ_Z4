@@ -175,3 +175,14 @@ resultsBER calculate(string path1, string path2) // Podanie scieżek dwóch plik
     outcome.czas2 = clock();
     return outcome;
 }
+
+void displayResults(resultsBER outcome) // WYciągnięcie wyników ze struct BER
+{
+    stringstream wiad;
+    wiad << "Program wykonal obliczenia z tymi wynikami: " << endl;
+    wiad << "Bit Error Rate: " << outcome.BER << endl;
+    wiad << "Ilosc bitow: " << outcome.qty << endl;
+    wiad << "Ilosc bledow: " << outcome.err << endl;
+    wiad << "Czas obliczen: " << ((float)outcome.czas2 - outcome.czas1) / CLOCKS_PER_SEC << " sec " << endl;
+    saveLog(wiad.str());
+}
