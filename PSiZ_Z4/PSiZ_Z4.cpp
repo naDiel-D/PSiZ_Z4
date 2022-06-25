@@ -132,6 +132,18 @@ struct resultsBER // Struct dla BER
     clock_t czas1;
     clock_t czas2;
     float BER;
-    double bledy;
-    double ilosc;
+    double err;
+    double qty;
 };
+
+uint8_t hammingDistance(uint8_t n1, uint8_t n2) // Obliczenie BER
+{
+    uint8_t x = n1 ^ n2;
+    uint8_t setBits = 0;
+    while (x > 0)
+    {
+        setBits += x & 1;
+        x >>= 1;
+    }
+    return setBits;
+}
